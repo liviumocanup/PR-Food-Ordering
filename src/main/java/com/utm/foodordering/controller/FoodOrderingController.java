@@ -19,27 +19,27 @@ public class FoodOrderingController {
 
     @PostMapping("/register")
     public void registerRestaurant(@RequestBody Restaurant restaurant) {
-        log.info("Registering restaurant : "+restaurant);
+        log.info("Registering restaurant : " + restaurant);
         registrationService.registerRestaurant(restaurant);
     }
 
     @GetMapping("/menu")
     public Menu getMenuForAllAvailableRestaurants() {
-        log.info("Returning all menus");
+        //log.info("Returning all menus");
         return registrationService.getMenus();
     }
 
     @PostMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
     public ClientOrder submitOrder(@RequestBody ClientOrderRequest clientOrderRequest) {
-        log.info("+ Order received : "+ clientOrderRequest);
+        //log.info("+ Order received : " + clientOrderRequest);
         return orderingService.submitOrder(clientOrderRequest);
     }
 
-//    @PostMapping("/rating")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void submitRating(@RequestBody ClientOrderRating clientOrderRating){
-//        log.info("Rating received : "+clientOrderRating);
-//        ratingService.submitRating(clientOrderRating);
-//    }
+    @PostMapping("/rating")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void submitRating(@RequestBody ClientOrderRating clientOrderRating) {
+        log.info("Rating received : " + clientOrderRating);
+        ratingService.submitRating(clientOrderRating);
+    }
 }
